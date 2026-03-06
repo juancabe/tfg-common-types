@@ -1,6 +1,6 @@
 #[cfg(feature = "std")]
 fn main() {
-    use common_types::firmware_app::{CommMethod, Config};
+    use common_types::firmware_app::{Communication, Config, LoraComm, WifiComm};
     use postcard_bindgen::{
         PackageInfo, generate_bindings,
         javascript::{GenerationSettings, build_package},
@@ -24,7 +24,7 @@ fn main() {
             version: "0.1.0".try_into().unwrap(),
         },
         GenerationSettings::enable_all(),
-        generate_bindings!(RootDummy, Config, CommMethod),
+        generate_bindings!(RootDummy, Config, Communication, WifiComm, LoraComm),
     )
     .unwrap();
     println!(
@@ -37,4 +37,3 @@ fn main() {
 fn main() {
     panic!("This binary requires the 'std' feature to run.");
 }
-
