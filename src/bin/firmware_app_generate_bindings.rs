@@ -1,6 +1,8 @@
 #[cfg(feature = "std")]
 fn main() {
-    use common_types::firmware_app::{Communication, Config, LoraComm, WifiComm};
+    use common_types::firmware_app::{
+        Communication, Config, LoraComm, SignalProtocolStatus, WifiComm,
+    };
     use postcard_bindgen::{
         PackageInfo, generate_bindings,
         javascript::{GenerationSettings, build_package},
@@ -24,7 +26,14 @@ fn main() {
             version: "0.1.0".try_into().unwrap(),
         },
         GenerationSettings::enable_all(),
-        generate_bindings!(RootDummy, Config, Communication, WifiComm, LoraComm),
+        generate_bindings!(
+            RootDummy,
+            Config,
+            Communication,
+            WifiComm,
+            LoraComm,
+            SignalProtocolStatus
+        ),
     )
     .unwrap();
     println!(

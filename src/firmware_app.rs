@@ -83,3 +83,15 @@ impl Config {
         matches!(self.communication, Communication::Lora(_))
     }
 }
+
+#[derive(serde::Serialize, serde::Deserialize, Debug, defmt::Format, MaxSize, PostcardBindings)]
+pub enum SignalProtocolStatus {
+    NotPeered,
+    Signal(u8),
+}
+
+impl From<u8> for SignalProtocolStatus {
+    fn from(value: u8) -> Self {
+        Self::Signal(value)
+    }
+}
