@@ -1,11 +1,12 @@
 #[cfg(feature = "std")]
 fn main() {
     use common_types::firmware_app::{
-        Communication, Config, LoraComm, SignalProtocolStatus, WifiComm,
+        BrokerIp, Communication, Config, LoraComm, SignalProtocolStatus, WifiComm,
     };
     use postcard_bindgen::{
-        PackageInfo, generate_bindings,
-        javascript::{GenerationSettings, build_package},
+        generate_bindings,
+        javascript::{build_package, GenerationSettings},
+        PackageInfo,
     };
     use std::path::Path;
 
@@ -30,6 +31,7 @@ fn main() {
             RootDummy,
             Config,
             Communication,
+            BrokerIp,
             WifiComm,
             LoraComm,
             SignalProtocolStatus
