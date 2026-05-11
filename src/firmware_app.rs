@@ -73,6 +73,10 @@ pub struct Config {
 }
 
 impl Config {
+    pub fn uses_lora(&self) -> bool {
+        self.forward_lora.is_some() || matches!(self.communication, Communication::Lora(_))
+    }
+
     pub fn validate(self) -> Result<Self, ()> {
         if self.producer_name.is_empty() || contains_mqtt_topic_meta(self.producer_name.as_str()) {
             return Err(());
