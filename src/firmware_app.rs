@@ -69,6 +69,7 @@ pub struct Config {
     pub forward_lora: Option<bool>,
     pub producer_name: heapless::String<{ MAX_PRODUCER_NAME_LEN }>,
     pub group_name: heapless::String<{ MAX_GROUP_NAME_LEN }>,
+    pub user_login: heapless::String<{ MAX_USERNAME_LEN }>,
     pub data_template_uuid: Option<heapless::String<{ Hyphenated::LENGTH }>>,
 }
 
@@ -79,6 +80,10 @@ impl Config {
 
     pub fn validate(self) -> Result<Self, ()> {
         if self.producer_name.is_empty() || contains_mqtt_topic_meta(self.producer_name.as_str()) {
+            return Err(());
+        }
+
+        if self.user_login.is_empty() {
             return Err(());
         }
 
